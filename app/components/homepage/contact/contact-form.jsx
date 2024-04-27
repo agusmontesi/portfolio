@@ -4,7 +4,6 @@ import { isValidEmail } from '@/utils/check-email';
 import emailjs from '@emailjs/browser';
 import axios from 'axios';
 import { useState } from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { TbMailForward } from "react-icons/tb";
 import { toast } from 'react-toastify';
 
@@ -14,7 +13,6 @@ function ContactForm() {
     email: '',
     message: '',
   });
-  const [captcha, setCaptcha] = useState(null);
   const [error, setError] = useState({
     email: false,
     required: false,
@@ -27,22 +25,8 @@ function ContactForm() {
   };
 
   const handleSendMail = async (e) => {
-    if (!captcha) {
-      toast.error('Please complete the captcha!');
-      return;
-    } else {
-      const res = await axios.post(`${process.env.NEXT_PUBLIC_APP_URL}/api/google`, {
-        token: captcha
-      });
-
-      setCaptcha(null);
-      if (!res.data.success) {
-        toast.error('Captcha verification failed!');
-        return;
-      };
-    };
-
     e.preventDefault();
+    
     if (!input.email || !input.message || !input.name) {
       setError({ ...error, required: true });
       return;
