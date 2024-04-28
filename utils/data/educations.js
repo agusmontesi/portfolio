@@ -9,7 +9,7 @@ export const educations = [
     id: 3,
     title: "Web developer like a ninja",
     duration: "2017 - 2018",
-    institution: "Baitus Saif Islamia Madrasah",
+    institution: "Freecodecamp",
   },
   {
     id: 2,
